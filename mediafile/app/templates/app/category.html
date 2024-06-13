@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width: 400px;
+            height: 400px;
+        }
+        body{
+            padding-left: 20px;
+        }
+        .books{
+            height: 80vh;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        .book{
+            margin-right: 50px;
+        }
+         .category_books{
+            margin-top: 50px;
+
+            display: flex;
+            justify-content: space-around;
+
+        }
+    </style>
+</head>
+<body>
+<div class="category_books">
+    <div>
+        <h1>{{ category.name }}</h1>
+        <img src="{{category.image.url}}" alt="">
+    </div>
+    <div class="books">
+    <h1>Книги этой категории</h1>
+        {%for book in books%}
+        <div class="book">
+        <div> {{book.name}}</div>
+        <img src="{{book.image.url}}">
+            <div>{{book.description}}</div>
+
+        </div>
+        {%endfor%}
+    </div>
+</div>
+</body>
+</html>

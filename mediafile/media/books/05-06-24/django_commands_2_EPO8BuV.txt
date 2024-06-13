@@ -1,0 +1,11 @@
+python manage.py createsuperuser
+py .\manage.py migrate
+py .\manage.py makemigrations
+python manage.py runserver
+python manage.py runserver 0.0.0.0:9000 == создание в локальной сети
+python manage.py runserver 9000 == изменение порта после ":"
+django-admin startapp second_app
+django-admin startproject shop
+
+
+

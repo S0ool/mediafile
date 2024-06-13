@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img{
+            width:200px;
+            height:200px;
+        }
+        body{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .categories,.authors{
+            margin-top: 50px;
+            height: 40vh;
+            overflow: scroll;
+            overflow-x: hidden;
+            width: 120%;
+        }
+        .books{
+            margin-top: 50px;
+            height: 80vh;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        .book img{
+            width:400px;
+            height:400px;
+        }
+        .book{
+            margin: auto 40px;
+        }
+        .books h1{
+            margin-left: 200px;
+        }
+        .categories h1{
+            margin-left: 20px;
+        }
+         .authors h1{
+            margin-left: 40px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="books">
+
+<h1><a href="/books"> Книги</a></h1>
+
+    {%for book in books%}
+    <div class="book">
+    <div> {{book.name}}</div>
+    <img src="{{book.image.url}}">
+        <div>{{book.description}}</div>
+
+    </div>
+    {%endfor%}
+</div>
+<div class="categories_authors">
+<div class="categories">
+<h1><a href="/categories"> Категории</a></h1>
+
+{%for category in categories%}
+    <div class="category">
+    <div>{{category.name}}</div>
+    <img src="{{category.image.url}}">
+    </div>
+    {%endfor%}
+</div>
+<div class="authors">
+
+<h1> <a href="/authors">Авторы</a></h1>
+
+{%for author in authors%}
+    <div class="author">
+    <div> {{author.name}}</div>
+    <img src="{{author.image.url}}">
+    <div>{{author.biography}}</div>
+
+    </div>
+    {%endfor%}
+</div>
+</div>
+
+
+</body>
+</html>

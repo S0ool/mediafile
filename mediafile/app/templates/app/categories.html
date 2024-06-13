@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .all_categories{
+            margin-top: 50px;
+
+            display: flex;
+            justify-content: space-around;
+        }
+        img{
+            width: 400px;
+            height: 400px;
+        }
+        .categories{
+            height: 80vh;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        .category{
+            margin-right: 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="all_categories">
+<div>
+<h1>Добавить категорию</h1>
+    <form action="{% url 'create_category' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input type="text" name="category_name" placeholder="category_name"><br><br>
+        <input type="file" name="category_image" accept="image/*"><br><br>
+        <button>Создать</button><br><br>
+    </form>
+    <h1>Изменить категорию</h1>
+
+    <form action="{% url 'change_category' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input type="text" name="category_name" placeholder="category_name"><br><br>
+        <input type="file" name="category_image" accept="image/*"><br><br>
+        Название категории <select name="category_id">
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+        </select><br><br>
+        <button>Изменить</button><br><br>
+    </form>
+        <h1>Удалить категорию</h1>
+
+    <form action="{% url 'delete_category' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        Название категории <select name="category_id">
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+        </select><br><br>
+        <button>Удалить</button><br><br>
+    </form>
+
+</div>
+<div class="categories">
+    <h1> Категории</h1>
+
+{%for category in categories%}
+    <div class="category">
+    <div><a href="{% url 'category' category_id=category.id %}">{{category.name}}</a></div>
+    <img src="{{category.image.url}}">
+    </div>
+    {%endfor%}
+
+
+</div>
+</div>
+</body>
+</html>

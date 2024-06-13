@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .all_authors{
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+        }
+        img{
+            width: 400px;
+            height: 400px;
+        }
+        .authors{
+            height: 80vh;
+            overflow: scroll;
+            overflow-x: hidden;
+        }
+        .author{
+            margin-right: 50px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="all_authors">
+<div>
+<h1>Добавить автора</h1>
+    <form action="{% url 'create_author' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input type="text" name="author_name" placeholder="author_name"><br><br>
+        <input type="file" name="author_image" accept="image/*"><br><br>
+        <button>Создать</button><br><br>
+    </form>
+    <h1>Изменить автора</h1>
+
+    <form action="{% url 'change_author' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <input type="text" name="author_name" placeholder="author_name"><br><br>
+        <input type="file" name="author_image" accept="image/*"><br><br>
+        Название автора <select name="author_id">
+            {% for author in authors %}
+            <option value="{{author.id}}">{{author.name}}</option>
+        {% endfor %}
+        </select><br><br>
+        <button>Изменить</button><br><br>
+    </form>
+        <h1>Удалить автора</h1>
+
+    <form action="{% url 'delete_author' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        Название автора <select name="author_id">
+            {% for author in authors %}
+            <option value="{{author.id}}">{{author.name}}</option>
+        {% endfor %}
+        </select><br><br>
+        <button>Удалить</button><br><br>
+    </form>
+
+</div>
+<div class="authors">
+    <h1> Авторы</h1>
+
+{%for author in authors%}
+    <div class="author">
+    <div>{{author.name}}</div>
+    <img src="{{author.image.url}}">
+    </div>
+    {%endfor%}
+
+
+</div>
+</div>
+</body>
+</html>
